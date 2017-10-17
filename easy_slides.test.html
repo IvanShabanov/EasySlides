@@ -1,0 +1,128 @@
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="jquery.easy_slides.js"></script>
+<style>
+.slider {
+  position: relative;
+  width: 700px;
+  height: 200px;
+  margin: 0 auto;
+  border: 1px solid #000;
+  overflow: hidden;
+}
+.slider > *{
+  transition: 1s;
+} 
+.slider > *:hover{
+  opacity: 1;
+}
+.slider .active {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin: -50px 0 0 -100px;
+  width: 200px;
+  height: 100px;
+  border: 1px solid #000;
+  background: #fff;
+  opacity: 0.95;
+  z-index: 100;
+} 
+.slider .next1,
+.slider .prev1 {
+  position: absolute;
+  left: 70%;
+  top: 70%;
+  margin: -40px 0 0 -40px;
+  width: 80px;
+  height: 80px;
+  border: 1px solid #000;
+  background: #aaa;
+  opacity: 0.8;
+  z-index: 90;
+} 
+.slider .prev1 {
+  position: absolute;
+  left: 30%;
+  top: 30%;  
+}
+.slider .next2,
+.slider .prev2 {
+  position: absolute;
+  left: 85%;
+  top: 15%;
+  margin: -35px 0 0 -35px;
+  width: 170px;
+  height: 170px;
+  border: 1px solid #000;
+  background: #999;
+  opacity: 0.5;
+  z-index: 80;
+} 
+.slider .prev2 {
+  position: absolute;
+  left: 15%;
+  top: 85%;  
+}
+.slider .hidden {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin: -35px 0 0 -35px;
+  width: 70px;
+  height: 70px;
+  border: 1px solid #000;
+  background: #fff;
+  opacity: 0;
+  z-index: 1;  
+} 
+.slider .next_button,
+.slider .prev_button  {
+  position: absolute;
+  left: 95%;
+  top: 100%;
+  margin: -35px 0 0 -25px;
+  width: 50px;
+  height: 30px;
+  border: 1px solid #000;
+  background: #fff;
+}
+.slider .prev_button  {
+  position: absolute;
+  left: 5%;
+}  
+
+</style>
+</head>
+<body>
+ <div class="slider">
+  <div>slide1</div>
+  <div>slide2</div>
+  <div>slide3</div>
+  <div>slide4</div>
+  <div>slide5</div>
+  <div>slide6</div>
+  <div>slide7</div>
+  <div>slide8</div>
+  <div>slide9</div>
+  <div>slide1</div>
+  <div>slide2</div>
+  <div>slide3</div>
+  <div>slide4</div>
+  <div>slide5</div>
+  <div>slide6</div>
+  <div>slide7</div>
+  <div>slide8</div>
+  <div>slide9</div>
+
+  <div class="next_button">Next</div>  
+  <div class="prev_button">prev</div>  
+ </div>
+ <script>
+   $(document).ready(function() {
+     $('.slider').EasySlides({'autoplay': true, 'show': 5})
+   });
+ </script>
+</body>
+</html>
