@@ -1,0 +1,2 @@
+# EasySlides
+Jquery plagin slides
