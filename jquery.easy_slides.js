@@ -1,11 +1,19 @@
 ﻿/*
-(c) 2017 Шабанов Иван
+EasySlides - слидер
+Autor 2017 Shabanov Ivan (Шабанов Иван)
 Usage:
+   
 
    $('.slider').EasySlides({
-      'autoplay': true,
+      'autoplay': true, 
       'timeout': 3000,
-      'show': 5});
+      'show': 5, //how many items not hidden
+      'vertical': false,  //is vertical slider. If true slides changing by up/down mouse move
+      'reverse': false, //Reverse slideк control 
+      'mouseevents': true,
+      'beforeshow': function () {},
+      'aftershow': function () {},      
+      });
 
 */
 (function( $ ){
@@ -14,13 +22,19 @@ Usage:
     var settings = $.extend( {
       'autoplay': false,
       'timeout': 3000,
-      'show': 5
+      'show': 5,
+      'vertical': false,
+      'reverse': false,
+      'mouseevents': true,
+      'beforeshow': function () {},
+      'aftershow': function () {},
     }, options);
     return this.each(function() {        
       var this_slider = this;
       var EasySlidesTimer;
       var count = $(this_slider).children('*:not(.next_button, .prev_button)').length;
       var cur_slider = 0;
+      var mousedowned = false;
       while (count < settings['show']) {
         var html = $(this_slider).html();
         $(html).appendTo(this_slider);
@@ -29,6 +43,10 @@ Usage:
       }
 
       var EasySlidesNext = function (nextslide) {
+        clearTimeout(EasySlidesTimer);
+        if (typeof settings['beforeshow'] == 'function') {
+          settings['beforeshow'];
+        };
         var i = 0;
         if (count > 0) {
           if (typeof nextslide == 'number') {
@@ -37,7 +55,8 @@ Usage:
             cur_slider ++;
             nextslide = cur_slider;
           }
-
+          while (cur_slider < 0) {cur_slider = cur_slider + count;}
+          while (cur_slider > count) {cur_slider = cur_slider - count;}
           while (nextslide < 0) {nextslide = nextslide + count;}
           while (nextslide > count) {nextslide = nextslide - count;}
      
@@ -45,9 +64,7 @@ Usage:
           $(this_slider).children('*:not(.next_button, .prev_button)').each(function() {
             var cssclass = '';
             var icount = 0;
-            console.log(nextslide);
             icount = i - nextslide ;
-            console.log(icount);
             while (icount < 0) {
               icount = icount + count;
             };
@@ -85,11 +102,11 @@ Usage:
               settings['timeout']);
           }
         }
+        if (typeof settings['aftershow'] == 'function') {
+          settings['aftershow'];
+        };
 
       };
-
-      
-      
       EasySlidesNext(0);
       $(this_slider).children(':not(.next_button, .prev_button)').click(function () {
         EasySlidesNext( $(this_slider).children().index(this) );
@@ -100,45 +117,75 @@ Usage:
       $(this_slider).find('.prev_button').click(function() {
               cur_slider --;
               EasySlidesNext(cur_slider);
-
       });
-      var mousedowned = false;
-      $(this_slider).on('mousedown', function(e) {
-          $(this).data('posstart', { x: e.pageX, y: e.pageY });
-          mousedowned = true;
-      }).on('mouseup, mouseout', function(e) {
-        if (mousedowned) {
-          var p0 = $(this).data('posstart'),
-              p1 = { x: e.pageX, y: e.pageY },
-              d = p1.x - p0.x;
-          mousedowned = false;
-          $(this).removeData('posstart');              
-          if (Math.abs(d) > 4) {
-            if (d > 0) {
-              cur_slider --;
-              EasySlidesNext(cur_slider);
-            } else if (d < 0) {
-              EasySlidesNext();
+      if (settings['mouseevents']) {
+        $(this_slider).bind('mousemove', function(e) {
+          if (e.buttons > 0) {
+            if (!mousedowned) {
+              //Первое нажатие на кнопку мыши 
+              var w = $(this).find('.active').width();
+              if (settings['vertical']) {
+                w = $(this).find('.active').height();
+              }  
+              $(this).data('posstart', { 
+                              x: e.pageX, 
+                              y: e.pageY, 
+                              width: w
+                              });
+              mousedowned = true;
+            } else {
+              // Двигаеммышью с зажатой кнопкой 
+              var p0 = $(this).data('posstart'),
+                  p1 = { x: e.pageX, y: e.pageY },
+                  d = p1.x - p0.x;
+              if (settings['vertical']) {
+                d = p1.y - p0.y;
+              }
+              if (settings['reverse']) {
+                d = -d;
+              }    
+              if (Math.abs(d) > (0.5 * p0.width)) {
+                $(this).data('posstart' , { 
+                              x: e.pageX, 
+                              y: e.pageY, 
+                              width:  p0.width
+                              });
+
+                if (d > 0) {
+                  cur_slider --;
+                } else {
+                  cur_slider ++;
+                }
+                EasySlidesNext(cur_slider);
+              }              
+            }
+          } else {
+            if (mousedowned) {
+              // Отжали кнопку мыши
+              mousedowned = false;
+              var p0 = $(this).data('posstart'),
+                  p1 = { x: e.pageX, y: e.pageY },
+                  d = p1.x - p0.x;
+              if (settings['vertical']) {
+                d = p1.y - p0.y;
+              } 
+              if (settings['reverse']) {
+                d = -d;
+              }    
+              $(this).removeData('posstart');              
+              if (Math.abs(d) > (0.5 * p0.width)) {
+                if (d > 0) {
+                  cur_slider --;
+                } else {
+                  cur_slider ++;
+                }
+                EasySlidesNext(cur_slider);
+              }
             }
           }
-        }
-      }).on('mousemove', function(e) {
-        if (mousedowned) {
-          var p0 = $(this).data('posstart'),
-              p1 = { x: e.pageX, y: e.pageY },
-              d = p1.x - p0.x;
-          if (Math.abs(d) > 4) {
-            if (d > (0.5 * $(this).find('.active').width())) {
-              $(this).data('posstart', { x: e.pageX, y: e.pageY });
-              cur_slider --;
-              EasySlidesNext(cur_slider);
-            } else if (d < (-0.5 * $(this).find('.active').width())) {
-              $(this).data('posstart', { x: e.pageX, y: e.pageY });
-              EasySlidesNext();
-            }
-          }
-        }
-      });         
+        });
+
+      }       
     });
   }
 })( jQuery );
