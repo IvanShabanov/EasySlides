@@ -12,6 +12,8 @@ Usage:
       'reverse': false, //Перевернутый слайдер
       'touchevents': true, //Вкючено ли события на прикосновения к сладеру (листания и т.п) 
       'delayaftershow': 300, //Задержка после смены слайдера, в это время слайдер нельзя листать
+      'stepbystep': true, //При клике на далекий слайд перейти к нему последовательно, а не сразу
+      'startslide': 0,  //Стартовый слайд 
       'beforeshow': function () {},
       'aftershow': function () {},      
       });
@@ -30,8 +32,10 @@ Usage:
       'delayaftershow': 300,
       'stepbystep': true,
       'startslide': 0,
+      'distancetochange': 10,
       'beforeshow': function () {},
       'aftershow': function () {},
+      
     }, options);
     return this.each(function() {        
       var this_slider = this;
@@ -42,15 +46,19 @@ Usage:
       var cur_slide = 0;
       var mousedowned = false;
       var need_slide = 0;
+      var slides;
       if (count > 0) {
 
         while (count < settings['show']) {
           var html = $(this_slider).html();
           $(html).appendTo(this_slider);
           $(this_slider).children('.next_button:eq(0), .prev_button:eq(0), .nav_indicators:eq(0)').remove();
-          count = $(this_slider).children('*:not(.next_button, .prev_button, .nav_indicators)').length;
+          slides = $(this_slider).children('*:not(.next_button, .prev_button, .nav_indicators)');
+
+          count = $(slides).length;
         }
-        
+        slides = $(this_slider).children('*:not(.next_button, .prev_button, .nav_indicators)');
+
         if ($(this_slider).children('.nav_indicators').length > 0) {
           var nav_indicators = '<ul>';
           while (need_slide < count) {
@@ -102,9 +110,13 @@ Usage:
               $(this_slider).children('.nav_indicators').find('ul').find('li').removeClass('active');
               
               $(this_slider).find('.nav_indicators ul li:nth-child(' + (nextslide + 1) + ')').addClass('active');
-              console.log(nextslide + 1);
               i = 0;
+              /*
               $(this_slider).children('*:not(.next_button, .prev_button, .nav_indicators)').each(function() {
+              */
+              $(slides).each(function() {
+
+              
                 var cssclass = '';
                 var icount = 0;
                 icount = i - nextslide ;
@@ -118,7 +130,7 @@ Usage:
     
                 if (icount == 0) {
                   cssclass = 'active';
-                  $(this_slider).find('.' + cssclass+':not(.nav_indicators ul li.active)').removeClass(cssclass);
+                  $(this_slider).find('.' + cssclass+ ':not(.nav_indicators ul li)').removeClass(cssclass);
                   $(this).removeClass('hidden');
                   $(this).addClass(cssclass);
                 } else if (icount < settings['show'] / 2) {
@@ -150,7 +162,10 @@ Usage:
           };
         };
         EasySlidesNext(settings['startslide']);
+        /*
         $(this_slider).children(':not(.next_button, .prev_button, .nav_indicators)').click(function () {
+        */
+        $(slides).click(function () {
           need_slide = $(this_slider).children().index(this);
           if (settings['stepbystep']) {
             EasySlidesLoopToNeeded()
@@ -178,27 +193,40 @@ Usage:
         });
         if (settings['touchevents']) {
           var EasySliderMoved = function (xcur, ycur) {
+                  var offset = $(slides).find('.active').offset();
+                  var left = 0;
+                  var top = 0;
+                  if (typeof offset !== 'undefined') {
+                    left = offset.left;
+                    top = offset.top;
+                  }
+                  
                   var p0 = $(this_slider).data('posstart'),
-                      p1 = { x: xcur, y: ycur };
+                      p1 = {    x: xcur, 
+                                y: ycur,
+                                l: left,
+                                t: top,
+                           },
+                      d = 0;
                   if (typeof p0 === 'undefined') {
                     p0 = p1;
-                    $(this_slider).data('posstart', { 
-                                x: xcur, 
-                                y: ycur
-                                });
+                    $(this_slider).data('posstart', p1);
                   }
-                  var d = p1.x - p0.x;
+                  
                   if (settings['vertical']) {
                     d = p1.y - p0.y;
+                    top = p0.t  +  d;
+                    //$(this_slider).find('.active:not(.nav_indicators ul li)').offset({'top': top});
+                  } else {
+                    d = p1.x - p0.x;
+                    left = p0.l + d;
+                    //$(this_slider).find('.active:not(.nav_indicators ul li)').offset({'left': left});
                   }
                   if (settings['reverse']) {
                     d = -d;
                   }    
-                  if ((Math.abs(d) > ($(this_slider).width() / 4)) && (EasySlidesCanChange)) {
-                    $(this_slider).data('posstart' , { 
-                                  x: xcur, 
-                                  y: ycur
-                                  });
+                  if ((Math.abs(d) > settings['distancetochange']) && (EasySlidesCanChange)) {
+                    $(this_slider).data('posstart' , p1);
                     
                     if (d > 0) {
                       cur_slide --;

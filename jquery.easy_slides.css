@@ -4,7 +4,9 @@
   width: 1280px;
   height: 768px;
   margin: 0 auto;
-  overflow: hidden;
+  user-select: none;
+  /*overflow: hidden;*/
+  
 }
 .slider_one_big_picture > *{
   transition: ease all 1s;
@@ -29,11 +31,11 @@
 }
 .slider_one_big_picture .prev1,
 .slider_one_big_picture .next1 {
-  opacity: 1;
+  opacity: 0;
   position: absolute;
   top: 0px;
-  left: -1280px;
-  width: 100%;
+  left: 0px;
+  width: 0px;
   height: 100%;
   z-index: 0;
 }
@@ -45,8 +47,8 @@
   opacity: 0;
   position: absolute;
   top: 0px;
-  left: -1280px;
-  width: 100%;
+  left: 0px;
+  width: 0px;
   height: 100%;
   z-index: 0;
 }
@@ -60,6 +62,7 @@
   width: 1280px;
   height: 768px;
   margin: 0 auto;
+  user-select: none;  
 }
 .slider_circle_10 > *{
   transition: ease all 1s;
@@ -165,6 +168,7 @@
   height: 250px;
   position: relative;
   margin: 0 auto; 
+  user-select: none;
 }
 .slider_four_in_line > * {
   transition: ease all 1s;
@@ -229,6 +233,105 @@
   opacity: 0;
 }
 /*********************************/
+.slider_clock {
+  width: 600px;
+  height: 600px;
+  position: relative;
+  margin: 0 auto;
+  user-select: none;
+}
+.slider_clock > *{
+  transition: ease all 1s;
+}
+.slider_clock .active {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -200px; 
+  margin-top: -125px; 
+  width: 400px;
+  height: 250px;
+  transform: rotate(0deg);  
+  opacity: 1;
+  z-index: 10;
+  overflow: hidden;  
+}
+.slider_clock .next1,
+.slider_clock .next2,
+.slider_clock .next3,
+.slider_clock .next4,
+.slider_clock .next5,
+.slider_clock .next6,
+.slider_clock .next7,
+.slider_clock .prev1,
+.slider_clock .prev2,
+.slider_clock .prev3,
+.slider_clock .prev4,
+.slider_clock .prev5,
+.slider_clock .prev6,
+.slider_clock .prev7,
+.slider_clock .hidden {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 96px;
+  height: 60px;
+  margin-top: 200px;
+  margin-left: -48px;  
+  transform-origin: 48px -200px;
+  transform: rotate(0deg);
+  opacity: 1;
+  overflow: hidden;
+}
+.slider_clock .next2 {
+  transform: rotate(-30deg);
+}
+.slider_clock .next3 {
+  transform: rotate(-60deg);
+}
+.slider_clock .next4 {
+  transform: rotate(-90deg);
+}
+.slider_clock .next5 {
+  transform: rotate(-120deg);
+}
+.slider_clock .next6 {
+  transform: rotate(-150deg);
+}
+.slider_clock .next7 {
+  opacity: 0;
+  transform: rotate(-180deg);
+}
+.slider_clock .prev1 {
+  transform: rotate(30deg);
+}
+.slider_clock .prev2 {
+  transform: rotate(60deg);
+}
+.slider_clock .prev3 {
+  transform: rotate(90deg);
+}
+.slider_clock .prev4 {
+  transform: rotate(120deg);
+}
+.slider_clock .prev5 {
+  transform: rotate(150deg);
+}
+.slider_clock .prev6 {
+  transform: rotate(180deg);
+}
+.slider_clock .prev7 {
+  opacity: 0;
+  transform: rotate(210deg);
+}
+
+.slider_clock .hidden {
+  opacity: 0;
+  transform: rotate(180deg);
+}
+
+
+/*********************************/
 .nav_indicators {
   position: absolute;
   bottom: 0px;
@@ -280,6 +383,9 @@
   background: #fff  !important;;
   opacity: 0.8 !important;
   z-index: 5000 !important;
+  cursor: pointer;
+  text-align: center;
+  line-height: 30px;
 }
 .prev_button {
   position: absolute;
@@ -289,7 +395,7 @@
 .prev_button:hover {
   opacity: 1 !important;
 }
-.slide {
+div.slider > div:not(.nav_indicators):not(.next_button):not(.prev_button) {
   box-shadow: 0px 1px 3px #000;
   border: 1px solid #000;
   background: #fff;
