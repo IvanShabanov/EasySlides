@@ -1,5 +1,5 @@
 # EasySlides
-Jquery plagin slides
+Jquery plugin slides
 
 Usage
 
