@@ -107,7 +107,7 @@ Usage:
                         }, settings['delayaftershow']);
                         clearTimeout(EasySlidesTimer);
                         if (typeof settings['beforeshow'] == 'function') {
-                            settings['beforeshow'];
+                            settings['beforeshow']();
                         }
                         var i = 0;
                         if (count > 0) {
@@ -209,7 +209,7 @@ Usage:
                             }
                         }
                         if (typeof settings['aftershow'] == 'function') {
-                            settings['aftershow'];
+                            settings['aftershow']();
                         }
 
                     }
