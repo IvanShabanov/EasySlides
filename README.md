@@ -41,6 +41,6 @@ stepbystep - if "true" when user click on slide not next or prev - slides will b
 
 startslide - number of started slide (first slide is 0). Default - 0.
 
-beforeshow - function before chenge slide
+beforeshow - function before change slide
 
 aftershow - function after change slide
