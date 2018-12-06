@@ -314,12 +314,10 @@ Usage:
                     })
 
                     $(this_slider).bind('touchmove', function (e) {
-                        e.preventDefault();
                         var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
                         EasySliderMoved(touch.pageX, touch.pageY);
                     });
                     $(this_slider).bind('touchend', function (e) {
-                        e.preventDefault();
                         $(this_slider).removeData('posstart');
                     });
 
