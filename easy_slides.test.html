@@ -3,127 +3,146 @@
 
 <head>
     <title>Examples Easy Silder</title>
-    <link href="jquery.easy_slides.css" rel="stylesheet" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="style.css" rel="stylesheet" type="text/css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <link href="jquery.easy_slides.css" rel="stylesheet" type="text/css" />
     <script src="jquery.easy_slides.js"></script>
 </head>
 
 <body>
     <h1>Examples Easy Silder</h1>
 
-    <h2>One Big Picture</h2>
-    <div class="slider slider_one_big_picture">
-        <div>1</div>
-        <div>2</div>
-        <div>3</div>
-        <div>4</div>
-        <div>5</div>
-        <div>6</div>
-        <div>7</div>
-        <div>8</div>
-        <div>9</div>
-        <div class="next_button"></div>
-        <div class="prev_button"></div>
-        <div class="nav_indicators"></div>
-    </div>
+    <section>
+        <h2>One Big Picture</h2>
+        <div class="slider slider_one_big_picture">
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+            <div>5</div>
+            <div>6</div>
+            <div>7</div>
+            <div>8</div>
+            <div>9</div>
+            <div class="next_button"></div>
+            <div class="prev_button"></div>
+            <div class="nav_indicators"></div>
+        </div>
+        <script>
+            $(document).ready(function () {
+                $('.slider_one_big_picture').EasySlides({
+                    'autoplay': true,
+                    'stepbystep': false,
+                    'show': 5,
+                    'loop': false
+                })
+            });
+        </script>
+    </section>
 
-    <h2>One Big 2</h2>
-    <div class="slider slider_one_big_2">
-        <div>1</div>
-        <div>2</div>
-        <div>3</div>
-        <div>4</div>
-        <div>5</div>
-        <div>6</div>
-        <div>7</div>
-        <div>8</div>
-        <div>9</div>
-        <div class="nav_indicators"></div>
-    </div>
-    <h2>Circle</h2>
-    <div class="slider slider_circle_10">
-        <div>1</div>
-        <div>2</div>
-        <div>3</div>
-        <div>4</div>
-        <div>5</div>
-        <div>6</div>
-        <div>7</div>
-        <div>8</div>
-        <div>9</div>
-        <div class="next_button"></div>
-        <div class="prev_button"></div>
-    </div>
+    <section>
+        <h2>One Big 2</h2>
+        <div class="slider slider_one_big_2">
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+            <div>5</div>
+            <div>6</div>
+            <div>7</div>
+            <div>8</div>
+            <div>9</div>
+            <div class="nav_indicators"></div>
+        </div>
+        <script>
+            $(document).ready(function () {
+                $('.slider_one_big_2').EasySlides({
+                    'autoplay': false,
+                    'stepbystep': true,
+                    'show': 5,
+                    'loop': false
+                })
+            });
+        </script>
+    </section>
 
-    <h2>4 in line</h2>
-    <div class="slider slider_four_in_line">
-        <div>1</div>
-        <div>2</div>
-        <div>3</div>
-        <div>4</div>
-        <div>5</div>
-        <div>6</div>
-        <div>7</div>
-        <div>8</div>
-        <div>9</div>
-        <div class="next_button"></div>
-        <div class="prev_button"></div>
-    </div>
+    <section>
+        <h2>Circle</h2>
+        <div class="slider slider_circle_10">
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+            <div>5</div>
+            <div>6</div>
+            <div>7</div>
+            <div>8</div>
+            <div>9</div>
+            <div class="next_button"></div>
+            <div class="prev_button"></div>
+        </div>
+        <script>
+            $(document).ready(function () {
+                $('.slider_circle_10').EasySlides({
+                    'autoplay': true,
+                    'show': 13
+                })
+            });
+        </script>
+    </section>
 
-    <h2>Clock</h2>
-    <div class="slider slider_clock">
-        <div>1</div>
-        <div>2</div>
-        <div>3</div>
-        <div>4</div>
-        <div>5</div>
-        <div>6</div>
-        <div>7</div>
-        <div>8</div>
-        <div>9</div>
-        <div class="next_button"></div>
-        <div class="prev_button"></div>
-    </div>
+    <section>
+        <h2>4 in line</h2>
+        <div class="slider slider_four_in_line">
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+            <div>5</div>
+            <div>6</div>
+            <div>7</div>
+            <div>8</div>
+            <div>9</div>
+            <div class="next_button"></div>
+            <div class="prev_button"></div>
+        </div>
+        <script>
+            $(document).ready(function () {
+                $('.slider_four_in_line').EasySlides({
+                    'autoplay': true,
+                    'show': 9
+                })
+            });
+        </script>
+    </section>
 
-
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-
-    <script>
-        $(document).ready(function() {
-            $('.slider_one_big_picture').EasySlides({
-                'autoplay': true,
-                'stepbystep': false,
-                'show': 5,
-                'loop': false
-            })
-            $('.slider_one_big_2').EasySlides({
-                'autoplay': false,
-                'stepbystep': true,
-                'show': 5,
-                'loop': false
-            })
-            $('.slider_circle_10').EasySlides({
-                'autoplay': true,
-                'show': 13
-            })
-            $('.slider_four_in_line').EasySlides({
-                'autoplay': true,
-                'show': 9
-            })
-            $('.slider_clock').EasySlides({
-                'autoplay': true,
-                'stepbystep': false,
-                'show': 15
-            })
-        });
-
-    </script>
+    <section>
+        <h2>Clock</h2>
+        <div class="slider slider_clock">
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+            <div>5</div>
+            <div>6</div>
+            <div>7</div>
+            <div>8</div>
+            <div>9</div>
+            <div class="next_button"></div>
+            <div class="prev_button"></div>
+        </div>
+        <script>
+            $(document).ready(function () {
+                 $('.slider_clock').EasySlides({
+                     'autoplay': true,
+                     'stepbystep': false,
+                     'show': 15
+                 })
+             });
+         </script>
+    </section>
 </body>
 
 </html>
