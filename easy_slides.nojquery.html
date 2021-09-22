@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Examples Easy Silder</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link href="jquery.easy_slides.css" rel="stylesheet" type="text/css" />
+    <script src="easy_slides.js"></script>
+</head>
+
+<body>
+    <h1>Examples Easy Silder</h1>
+
+    <section>
+        <h2>One Big Picture</h2>
+        <div class="slider slider_one_big_picture">
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+            <div>5</div>
+            <div>6</div>
+            <div>7</div>
+            <div>8</div>
+            <div>9</div>
+            <div class="next_button"></div>
+            <div class="prev_button"></div>
+            <div class="nav_indicators"></div>
+        </div>
+        <script>
+                EasySlides('.slider_one_big_picture',
+                {
+                    'autoplay': true,
+                    'stepbystep': false,
+                    'show': 5,
+                    'loop': false
+                });
+        </script>
+    </section>
+
+    <section>
+        <h2>One Big 2</h2>
+        <div class="slider slider_one_big_2">
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+            <div>5</div>
+            <div>6</div>
+            <div>7</div>
+            <div>8</div>
+            <div>9</div>
+            <div class="nav_indicators"></div>
+        </div>
+        <script>
+            EasySlides('.slider_one_big_2',
+            {
+                    'autoplay': false,
+                    'stepbystep': true,
+                    'show': 5,
+                    'loop': false
+            });
+        </script>
+    </section>
+
+    <section>
+        <h2>Circle</h2>
+        <div class="slider slider_circle_10">
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+            <div>5</div>
+            <div>6</div>
+            <div>7</div>
+            <div>8</div>
+            <div>9</div>
+            <div class="next_button"></div>
+            <div class="prev_button"></div>
+        </div>
+        <script>
+                EasySlides('.slider_circle_10',{
+                    'autoplay': true,
+                    'show': 13
+                });
+        </script>
+    </section>
+
+    <section>
+        <h2>4 in line</h2>
+        <div class="slider slider_four_in_line">
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+            <div>5</div>
+            <div>6</div>
+            <div>7</div>
+            <div>8</div>
+            <div>9</div>
+            <div class="next_button"></div>
+            <div class="prev_button"></div>
+        </div>
+        <script>
+                EasySlides('.slider_four_in_line',
+                {
+                    'autoplay': true,
+                    'show': 9
+                })
+        </script>
+    </section>
+
+    <section>
+        <h2>Clock</h2>
+        <div class="slider slider_clock">
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+            <div>5</div>
+            <div>6</div>
+            <div>7</div>
+            <div>8</div>
+            <div>9</div>
+            <div class="next_button"></div>
+            <div class="prev_button"></div>
+        </div>
+        <script>
+                EasySlides('.slider_clock',
+                {
+                     'autoplay': true,
+                     'stepbystep': false,
+                     'show': 15
+                 })
+         </script>
+    </section>
+</body>
+
+</html>
