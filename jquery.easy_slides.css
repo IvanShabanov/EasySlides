@@ -1,3 +1,15 @@
+.slider img {
+    object-fit: cover;
+    opacity: 1;
+    width: 100%;
+    height: auto;
+    min-width: 100%;
+    min-height: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
 /*********************************/
 
 .slider_one_big_picture {
@@ -10,6 +22,7 @@
 
 .slider_one_big_picture > * {
     transition: ease all 1s;
+    overflow: hidden;
 }
 
 .slider_one_big_picture .hidden {
@@ -574,3 +587,5 @@ div.slider > div:not(.nav_indicators):not(.next_button):not(.prev_button) {
     box-sizing: border-box;
     font-size: 150px;
 }
+
+

@@ -53,7 +53,7 @@ EasySlides = function (selector, options) {
         let EasySlidesTimer;
         let EasySlidesCanChange = true;
 
-        let count = this_slider.querySelectorAll('*:not(.next_button, .prev_button, .nav_indicators)').length;
+        let count = this_slider.querySelectorAll(':scope>*:not(.next_button, .prev_button, .nav_indicators)').length;
         let cur_slide = 0;
         let mousedowned = false;
         let need_slide = 0;
@@ -74,11 +74,11 @@ EasySlides = function (selector, options) {
                 if (this_slider.querySelector('.nav_indicators')) {
                     this_slider.querySelector('.nav_indicators').remove();
                 };
-                slides = this_slider.querySelectorAll('*:not(.next_button, .prev_button, .nav_indicators)');
+                slides = this_slider.querySelectorAll(':scope>*:not(.next_button, .prev_button, .nav_indicators)');
                 count = slides.length;
             }
 
-            slides = this_slider.querySelectorAll('*:not(.next_button, .prev_button, .nav_indicators)');
+            slides = this_slider.querySelectorAll(':scope>*:not(.next_button, .prev_button, .nav_indicators)');
             count = slides.length;
 
             if (this_slider.querySelectorAll('.nav_indicators').length > 0) {
