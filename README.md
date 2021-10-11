@@ -1,24 +1,68 @@
 # EasySlides
-Jquery plugin slides
+
+# Jquery plugin slides
 
 Usage
 
-   
-      $('.slider').EasySlides({
-      'autoplay': true, 
-      'loop': true,
-      'timeout': 3000,
-      'show': 5, 
-      'vertical': false,  
-      'reverse': false, 
-      'touchevents': true, 
-      'delayaftershow': 300, 
-      'stepbystep': true, 
-      'startslide': 0,  
-      'beforeshow': function () {},
-      'aftershow': function () {},      
-      });
+1) Include the jQuery and plugin
 
+```
+<script link="/path_to_jquery/jquery.js "></script>
+<script link="/path_to_plugin/jquery.easy_slides.js "></script>
+```
+
+
+2) Init the slider in your JS
+      
+```      
+$('.slider').EasySlides({
+   'autoplay': true, 
+   'loop': true,
+   'timeout': 3000,
+   'show': 5, 
+   'vertical': false,  
+   'reverse': false, 
+   'touchevents': true, 
+   'delayaftershow': 300, 
+   'stepbystep': true, 
+   'startslide': 0,  
+   'beforeshow': function () {},
+   'aftershow': function () {},      
+});
+```
+
+
+# Pure JS
+
+Usage
+
+1) Include the plugin
+
+```
+<script link="/path_to_plugin/easy_slides.js "></script>
+```
+
+
+2) Init the slider in your JS
+      
+```      
+EasySlides('.slider', {
+   'autoplay': true, 
+   'loop': true,
+   'timeout': 3000,
+   'show': 5, 
+   'vertical': false,  
+   'reverse': false, 
+   'touchevents': true, 
+   'delayaftershow': 300, 
+   'stepbystep': true, 
+   'startslide': 0,  
+   'beforeshow': function () {},
+   'aftershow': function () {},      
+});
+```
+
+# Params
 
 
 autoplay - if "true" slides will change automaticly. Default - true.
