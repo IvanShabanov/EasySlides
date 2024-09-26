@@ -1,21 +1,25 @@
 ﻿/*
-EasySlides - слидер
-Autor 2017 Shabanov Ivan (Шабанов Иван)
+https://github.com/IvanShabanov/EasySlides
+
+EasySlides - слайдер
+Autor 2017-2024 Shabanov Ivan (Шабанов Иван)
 Usage:
 
    $('.slider').EasySlides({
-      'autoplay': true, 
-      'timeout': 3000,
-      'show': 5, //Сколь-ко позывать слайдов (по умолчанию 5: 1-активный, 2-предыдущих и 2-следующих)
-      'vertical': false,  //Если True то слайдер вертикальный, слайды листаются движением вверх/вниз
-      'reverse': false, //Перевернутый слайдер
-      'touchevents': true, //Вкючено ли события на прикосновения к сладеру (листания и т.п) 
-      'delayaftershow': 300, //Задержка после смены слайдера, в это время слайдер нельзя листать
-      'stepbystep': true, //При клике на далекий слайд перейти к нему последовательно, а не сразу
-      'startslide': 0,  //Стартовый слайд 
-      'beforeshow': function () {},
-      'aftershow': function () {},      
-      });
+        'autoplay': true,
+        'timeout': 3000,
+        'show': 5, //Сколь-ко позывать слайдов (по умолчанию 5: 1-активный, 2-предыдущих и 2-следующих)
+        'vertical': false,  //Если True то слайдер вертикальный, слайды листаются движением вверх/вниз
+        'reverse': false, //Перевернутый слайдер
+        'touchevents': true, //Вкючено ли события на прикосновения к сладеру (листания и т.п)
+        'delayaftershow': 300, //Задержка после смены слайдера, в это время слайдер нельзя листать
+        'stepbystep': true, //При клике на далекий слайд перейти к нему последовательно, а не сразу
+        'startslide': 0,  //Стартовый слайд
+        'beforeshow': function () {},
+        'aftershow': function () {},
+        'onclick': function (slide) {},
+        'disabledefaultclick': false,
+    });
 
 */
 (function ($) {
@@ -35,7 +39,8 @@ Usage:
             'distancetochange': 10,
             'beforeshow': function () {},
             'aftershow': function () {},
-
+            'onclick': function () { },
+            'disabledefaultclick': false,
         }, options);
         return this.each(function () {
             var this_slider = this;
@@ -130,7 +135,7 @@ Usage:
                                 while (nextslide >= count) {
                                     nextslide = nextslide - count;
                                 }
-                                
+
                             } else {
                                 if (cur_slide < 0) {
                                     cur_slide = 0;
@@ -183,7 +188,7 @@ Usage:
                                 } else {
                                     $(this).addClass('hidden');
                                 }
-                                
+
                                 if ((Math.abs(i - nextslide) > (settings['show'] / 2)) && (settings['loop'] == false)) {
                                     var icnt = 1;
                                     while (icnt < settings['show'] / 2) {
@@ -219,6 +224,12 @@ Usage:
                 $(this_slider).children(':not(.next_button, .prev_button, .nav_indicators)').click(function () {
                 */
                 $(slides).click(function () {
+                    if (typeof settings['onclick'] == 'function') {
+                        settings['onclick'](this);
+                    }
+                    if (settings['disabledefaultclick']) {
+                        return;
+                    }
                     need_slide = $(this_slider).children().index(this);
                     if (settings['stepbystep']) {
                         EasySlidesLoopToNeeded()

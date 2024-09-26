@@ -1,25 +1,28 @@
 ﻿/*
 https://github.com/IvanShabanov/EasySlides
 
-EasySlides - слидер
-Autor 2017-2021 Shabanov Ivan (Шабанов Иван)
+EasySlides - слайдер
+Autor 2017-2024 Shabanov Ivan (Шабанов Иван)
 Usage:
 
    EasySlides(
        '.slider',  // Селектор слайдера
-    {
-      'autoplay': true,
-      'timeout': 3000,
-      'show': 5, //Сколь-ко позывать слайдов (по умолчанию 5: 1-активный, 2-предыдущих и 2-следующих)
-      'vertical': false,  //Если True то слайдер вертикальный, слайды листаются движением вверх/вниз
-      'reverse': false, //Перевернутый слайдер
-      'touchevents': true, //Вкючено ли события на прикосновения к сладеру (листания и т.п)
-      'delayaftershow': 300, //Задержка после смены слайдера, в это время слайдер нельзя листать
-      'stepbystep': true, //При клике на далекий слайд перейти к нему последовательно, а не сразу
-      'startslide': 0,  //Стартовый слайд
-      'beforeshow': function () {},
-      'aftershow': function () {},
-      });
+        {
+            'autoplay': true,
+            'timeout': 3000,
+            'show': 5, //Сколь-ко позывать слайдов (по умолчанию 5: 1-активный, 2-предыдущих и 2-следующих)
+            'vertical': false,  //Если True то слайдер вертикальный, слайды листаются движением вверх/вниз
+            'reverse': false, //Перевернутый слайдер
+            'touchevents': true, //Вкючено ли события на прикосновения к сладеру (листания и т.п)
+            'delayaftershow': 300, //Задержка после смены слайдера, в это время слайдер нельзя листать
+            'stepbystep': true, //При клике на далекий слайд перейти к нему последовательно, а не сразу
+            'startslide': 0,  //Стартовый слайд
+            'beforeshow': function () {},
+            'aftershow': function () {},
+            'onclick': function (slide) {},
+            'disabledefaultclick': false,
+        }
+    );
 
 */
 
@@ -39,6 +42,8 @@ EasySlides = function (selector, options) {
         'distancetochange': 10,
         'beforeshow': function () { },
         'aftershow': function () { },
+        'onclick': function (slide) { },
+        'disabledefaultclick': false,
     };
 
     for (var key in options)
@@ -257,6 +262,12 @@ EasySlides = function (selector, options) {
 
             slides.forEach(function (element, index) {
                 element.addEventListener('click', function (event) {
+                    if (typeof settings['onclick'] == 'function') {
+                        settings['onclick'](element);
+                    }
+                    if (settings['disabledefaultclick']) {
+                        return;
+                    }
                     if (settings['stepbystep']) {
                         need_slide = index;
                         EasySlidesLoopToNeeded()

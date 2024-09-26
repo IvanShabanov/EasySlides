@@ -13,21 +13,23 @@ Usage
 
 
 2) Init the slider in your JS
-      
-```      
+
+```
 $('.slider').EasySlides({
-   'autoplay': true, 
+   'autoplay': true,
    'loop': true,
    'timeout': 3000,
-   'show': 5, 
-   'vertical': false,  
-   'reverse': false, 
-   'touchevents': true, 
-   'delayaftershow': 300, 
-   'stepbystep': true, 
-   'startslide': 0,  
+   'show': 5,
+   'vertical': false,
+   'reverse': false,
+   'touchevents': true,
+   'delayaftershow': 300,
+   'stepbystep': true,
+   'startslide': 0,
    'beforeshow': function () {},
-   'aftershow': function () {},      
+   'aftershow': function () {},
+   'onclick': function (slide) {},
+   'disabledefaultclick': false,
 });
 ```
 
@@ -44,21 +46,23 @@ Usage
 
 
 2) Init the slider in your JS
-      
-```      
+
+```
 EasySlides('.slider', {
-   'autoplay': true, 
+   'autoplay': true,
    'loop': true,
    'timeout': 3000,
-   'show': 5, 
-   'vertical': false,  
-   'reverse': false, 
-   'touchevents': true, 
-   'delayaftershow': 300, 
-   'stepbystep': true, 
-   'startslide': 0,  
+   'show': 5,
+   'vertical': false,
+   'reverse': false,
+   'touchevents': true,
+   'delayaftershow': 300,
+   'stepbystep': true,
+   'startslide': 0,
    'beforeshow': function () {},
-   'aftershow': function () {},      
+   'aftershow': function () {},
+   'onclick': function (slide) {},
+   'disabledefaultclick': false,
 });
 ```
 
@@ -88,3 +92,6 @@ startslide - number of started slide (first slide is 0). Default - 0.
 beforeshow - function before change slide
 
 aftershow - function after change slide
+
+onclick - function on click on ,
+   'disabledefaultclick': false,
