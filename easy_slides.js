@@ -383,9 +383,13 @@ EasySlides = function (selector, options) {
                     }
                 })
 
-                this_slider.addEventListener('touchmove', function (e) {
-                    var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
-                    EasySliderMoved(touch.pageX, touch.pageY);
+                this_slider.addEventListener('touchmove', function (event) {
+                    event.preventDefault();
+                    for (const changedTouch of event.changedTouches) {
+                        EasySliderMoved(changedTouch.pageX, changedTouch.pageY);
+                     }
+                    // var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
+                    // EasySliderMoved(touch.pageX, touch.pageY);
                 });
 
                 this_slider.addEventListener('touchend', function (e) {
