@@ -384,7 +384,6 @@ EasySlides = function (selector, options) {
                 })
 
                 this_slider.addEventListener('touchmove', function (event) {
-                    event.preventDefault();
                     for (const changedTouch of event.changedTouches) {
                         EasySliderMoved(changedTouch.pageX, changedTouch.pageY);
                      }
